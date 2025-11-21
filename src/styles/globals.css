@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Import theme tokens */
+@import "./tokens/theme.css";
+
+/* Import root-level CSS variables (gradients, shadows) */
+@import "./root.css";
+
+/* Your global resets or body styles */
+body {
+  background: var(--color-white);
+  color: var(--color-text);
+}
+
+
+button {
+  transition: 0.3s ease-in-out;
+}
+
+button:focus {
+  transform: scale(1.02, 1.02);
+}
+
+input{
+  border-radius: var(--radius-sm);
+}

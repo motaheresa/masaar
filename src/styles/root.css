@@ -1,0 +1,14 @@
+/* Contains ONLY variables that Tailwind doesn't handle: shadows & gradients. */
+:root {
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.10);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+    --shadow-card: 0 6px 12px rgba(0, 178, 7, 0.15);
+  
+    /* Gradients */
+    --gradient-primary: linear-gradient(90deg, #00B207 0%, #009306 100%);
+    --gradient-secondary: linear-gradient(90deg, #FF8A00 0%, #FFB347 100%);
+    --gradient-light: linear-gradient(90deg, #E6F7E7 0%, #FFFFFF 100%);
+  }
+  
