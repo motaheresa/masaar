@@ -1,0 +1,32 @@
+get skills and array for each TagsInput
+yearsOptions (not logic to be select it is input)
+تطابق الاسماء بين الفرونت والباك
+تطابق الاسكيما
+مراجعة لوجيك ال submit الاخير   
+حتة الميل اللي بيتبعت بعد الريجستر
+
+سواء داس باك او نيكست لازم يحفظ الداتا
+عايز اهندل زرار الباك فالنافيجشن
+
+
+// Backend ✍✍✍✍✍✍✍✍✍✍✍✍✍✍✍✍
+
+languages/skills tags and get languages/skills are not compatible
+languages/skills should accept new tags
+schema ta3bana khales dna bt3ty(as frontend) a7san mnha
+
+me route response:
+1- isVerified
+2- isProfileCompleted
+3- isCvUploaded 
+4- onboardingStep (if you apply pages for UI instead of components with conditional rendering)
+
+based on schema (Missed Values): ✍✍✍✍✍✍✍✍✍✍✍✍✍✍✍✍
+confirmPassword & major & currentYear
+
+
+based on schema (Incorrect Values): ❌❌❌❌❌❌❌❌❌❌
+jobTitle (array✅) 
+gender (required✅)
+phoneNumber (required✅)
+bio (optional✅)

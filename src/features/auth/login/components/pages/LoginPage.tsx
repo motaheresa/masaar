@@ -1,14 +1,12 @@
 "use client"
 // src/components/pages/LoginPage.tsx
-import React, { useState } from "react";
-import { LoginSkeleton } from "../components/organisms/LoginSkeleton";
-import { LoginForm } from "../components/organisms/LoginForm";
-import { useLogin } from "../hooks/useLogin";
-import { AuthLayout } from "../components/templates/AuthLayout";
+import { LoginForm } from "../organisms/LoginForm";
+import { useLogin } from "../../hooks/useLogin";
+import { AuthLayout } from "../templates/LoginLayout";
+import { motion } from "framer-motion";
 
 export const LoginPage = () => {
-  const [showSkeleton, setShowSkeleton] = useState(false);
-  const { register, handleSubmit, watch, errors, isLoading } = useLogin();
+  const { register, handleSubmit, watch, errors, isLoading, error } = useLogin();
 
   // Handlers for social login
   const handleGoogleSignIn = () => {
@@ -31,23 +29,32 @@ export const LoginPage = () => {
     // TODO: Navigate to signup page
   };
 
-  // Show skeleton loading state
-  if (showSkeleton) {
-    return <LoginSkeleton />;
-  }
-
   return (
-    <AuthLayout
-      showBranding={true}
-      onBrandingAction={() => setShowSkeleton(!showSkeleton)}
-    >
+    <AuthLayout>
       {/* Page Header */}
-      <div className="text-center mb-8">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-center mb-8"
+      >
         <h2 className="text-3xl font-bold text-primary mb-2">Welcome Back</h2>
         <p className="text-gray-600 text-sm">
           Please Enter Your Details To Log in
         </p>
-      </div>
+      </motion.div>
+
+      {/* Error Message */}
+      {error && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg"
+        >
+          <p className="text-sm text-red-600">{error}</p>
+        </motion.div>
+      )}
 
       {/* Login Form */}
       <LoginForm

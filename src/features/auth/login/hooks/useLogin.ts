@@ -1,49 +1,50 @@
-"use client"
 // src/features/auth/hooks/useLogin.ts
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { loginSchema, LoginFormData } from "../schemas/loginSchema";
+import { toast } from "react-toastify";
+import { loginApi } from "../api/loginApi";
 
 export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-    reset,
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    mode: "onSubmit",
   });
 
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
-    
+    setError(null);
+
     try {
-      console.log("Login data:", data);
-      
-      // TODO: Replace with actual API call
-      // Example:
-      // const response = await authApi.login(data);
-      // if (response.success) {
-      //   // Handle successful login (e.g., redirect, store token)
-      // }
-      
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      
-      // Reset form after successful login
-      // reset();
-      
-    } catch (error) {
-      console.error("Login error:", error);
-      // Handle error (e.g., show error message)
+      const response = await loginApi.login(data);
+
+      if (response.status === "success" && response.data) {
+        // Login successful
+        console.log("Login successful:", response.data.user);
+        toast.success("Logged in successfully",{
+          
+        })
+        // Redirect to dashboard or home page
+        // router.push("/dashboard"); // Change this to your desired route
+      } else {
+        // Login failed
+        setError(response.message);
+        toast.error(response.message)
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "An unexpected error occurred")
+      setError(err instanceof Error ? err.message : "An unexpected error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -55,6 +56,7 @@ export const useLogin = () => {
     watch,
     errors,
     isLoading,
-    reset,
+    error,
+    clearError: () => setError(null),
   };
 };

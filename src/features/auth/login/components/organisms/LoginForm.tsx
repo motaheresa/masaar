@@ -2,16 +2,17 @@
 import React from "react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa6";
 import { OutlineTextField } from "@/components/molecules/form/Input/TextField";
 import { OutlinePasswordField } from "@/components/molecules/form/Input/PasswordField";
 import { Button } from "@/components/atoms/Button/Button";
 import { FormDivider } from "@/components/molecules/form/FormDivider";
 import { LoginFormData } from "../../schemas/loginSchema";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 type LoginFormProps = {
-  onSubmit: () => void;
+  onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   isLoading: boolean;
   register: UseFormRegister<LoginFormData>;
   watch: (name: keyof LoginFormData) => string;
@@ -42,86 +43,146 @@ export const LoginForm = ({
     console.log("GitHub Sign In clicked");
     onGithubSignIn?.();
   };
-  
 
   return (
-    <div className="space-y-6">
+    <form onSubmit={onSubmit} className="w-full">
       {/* Email Field */}
-      <OutlineTextField
-        label="Email"
-        type="email"
-        value={watch("email") || ""}
-        onChange={(value) => {
-          const event = { target: { name: "email", value } };
-          register("email").onChange(event);
-        }}
-        placeholder="your@example.com"
-        error={errors.email?.message}
-      />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+        className="mb-6"
+      >
+        <OutlineTextField
+          label="Email"
+          type="email"
+          placeholder="your@example.com"
+          name="email"
+          register={register}
+          error={errors.email?.message}
+        />
+      </motion.div>
 
       {/* Password Field */}
-      <OutlinePasswordField
-        label="Password"
-        name="password"
-        value={watch("password") || ""}
-        onChange={(value) => {
-          const event = { target: { name: "password", value } };
-          register("password").onChange(event);
-        }}
-        placeholder="••••••••••"
-        error={errors.password?.message}
-      />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+        className="mb-6"
+      >
+        <OutlinePasswordField
+          label="Password"
+          name="password"
+          placeholder="••••••••••"
+          register={register}
+          error={errors.password?.message}
+        />
+      </motion.div>
 
       {/* Forgot Password Link */}
-      <div className="text-right">
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            onForgotPassword?.();
-          }}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.25 }}
+        className="text-right mb-6"
+      >
+        <Link
+          href="/login/forgot-password/identify"
+          // onClick={(e) => {
+          //   e.preventDefault();
+          //   onForgotPassword?.();
+          // }}
           className="text-sm text-primary hover:underline hover:text-primary-hover transition-colors"
         >
           Forgot Your Password?
-        </a>
-      </div>
+        </Link>
+      </motion.div>
 
       {/* Login Button */}
-      <Button onClick={onSubmit} variant="primary" loading={isLoading} disabled={Object.keys(errors).length>0} className="py-3.5">
-        Login
-      </Button>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.3 }}
+        whileHover={{ scale: isLoading ? 1 : 1.01 }}
+        whileTap={{ scale: isLoading ? 1 : 0.99 }}
+        className="mb-6"
+      >
+        <Button
+          type="submit"
+          disabled={isLoading}
+          loading={isLoading}
+          variant="primary"
+          className="shadow-sm"
+        >
+          {isLoading ? "Logging in..." : "Login"}
+        </Button>
+      </motion.div>
 
       {/* Divider */}
       <FormDivider />
 
       {/* Social Login Buttons */}
       <div className="space-y-3">
-        <Button
-          onClick={handleGoogleSignIn}
-          variant="outline"
-          Icon={FcGoogle}
-        > Sign in with Google</Button>
-        <Button
-          onClick={handleGoogleSignIn}
-          Icon={FaGithub}
-          variant="outline"
-        >Sign in with GitHub</Button>
+        {/* Google Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.35 }}
+          whileHover={{ scale: isLoading ? 1 : 1.01 }}
+          whileTap={{ scale: isLoading ? 1 : 0.99 }}
+        >
+          <Button
+            type="button"
+            onClick={handleGoogleSignIn}
+            disabled={isLoading}
+            Icon={FcGoogle}
+            variant="outline"
+          >
+            <span className="text-sm font-medium text-gray-700">
+              Sign in with Google
+            </span>
+          </Button>
+        </motion.div>
+
+        {/* GitHub Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+          whileHover={{ scale: isLoading ? 1 : 1.01 }}
+          whileTap={{ scale: isLoading ? 1 : 0.99 }}
+        >
+          <Button
+            type="button"
+            onClick={handleGithubSignIn}
+            disabled={isLoading}
+            Icon={FaGithub}
+            variant="outline"
+          >
+            <span className="text-sm font-medium text-gray-700">
+              Sign in with GitHub
+            </span>
+          </Button>
+        </motion.div>
       </div>
 
       {/* Signup Link */}
-      <p className="text-center text-sm text-gray-600 mt-6">
-        Dont have an account?
-        <Link
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            onSignupClick?.();
-          }}
-          className="text-primary ms-1 hover:underline font-medium hover:text-primary-hover transition-colors"
-        >
-          Signup
-        </Link>
-      </p>
-    </div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.45 }}
+        className="mt-6"
+      >
+        <p className="text-center text-sm text-gray-600">
+          Don{`'`}t have an account?
+          <Link
+            href="/register/role-selection"
+            className="text-primary ms-1 hover:underline font-medium hover:text-primary-hover transition-colors"
+          >
+            Signup
+          </Link>
+        </p>
+      </motion.div>
+    </form>
   );
 };

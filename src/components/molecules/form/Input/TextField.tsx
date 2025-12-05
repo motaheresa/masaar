@@ -1,31 +1,35 @@
 // src/components/atoms/OutlineTextField.tsx
 import React from "react";
+import { UseFormRegister } from "react-hook-form";
 
 type IOutlineTextFieldProps = {
   label?: string;
   id?: string;
-  value: string;
-  onChange: (value: string) => void;
   type?: string;
   placeholder?: string;
   error?: string;
+  register:UseFormRegister<any>;
+  name?:string;
   className?: string;
   icon?: React.ReactElement;
+  isRequired?:boolean
 };
 
 export const OutlineTextField = ({
   label,
   id,
-  value,
-  onChange,
   type = "text",
   placeholder,
   error,
+  register,
   className = "",
+  name="",
   icon,
+  isRequired=false
 }: IOutlineTextFieldProps) => {
+  
   return (
-    <div>
+    <div className="w-full">
       {label && (
         <label
           htmlFor={id}
@@ -43,9 +47,8 @@ export const OutlineTextField = ({
         <input
           id={id}
           type={type}
-          value={value}
+          {...register(name,{required:isRequired})}
           placeholder={placeholder}
-          onChange={(e) => onChange(e.target.value)}
           className={`block w-full ${
             icon ? "ps-9" : "ps-3"
           } pe-3 py-3.5 border-b-2 ${error?"border-red-500 ring-red-500 bg-red-100":"border-primary"} text-gray-900 text-sm focus:ring-2 ring-primary outline-none placeholder:text-gray-400 ${className}`}
