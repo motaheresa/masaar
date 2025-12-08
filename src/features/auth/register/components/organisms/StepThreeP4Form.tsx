@@ -7,8 +7,15 @@ import { FaSquareGithub } from "react-icons/fa6";
 import SetupStepsFormBtns from "../molecules/SetupStepsFormBtns";
 import { Controller } from "react-hook-form";
 import { useStepThreeP4Form } from "../../hooks/useStepThreeP4Form";
+import { useStepThreeP4StudentForm } from "../../hooks/useStepThreeP4StudentForm";
+import { useSearchParams } from "next/navigation";
 
 const StepThreeP4Form = () => {
+  const role = useSearchParams().get("role");
+  
+  // Use student hook if role is student, otherwise use mentor hook
+  const hookResult = role === "student" ? useStepThreeP4StudentForm() : useStepThreeP4Form();
+  
   const {
     register,
     control,
@@ -18,7 +25,7 @@ const StepThreeP4Form = () => {
     isValid,
     isLoading,
     languagesOptions
-  } = useStepThreeP4Form();
+  } = hookResult;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

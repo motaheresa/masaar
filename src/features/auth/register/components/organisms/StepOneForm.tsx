@@ -73,33 +73,33 @@ const StepOneForm = () => {
             />
           </motion.div>
 
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-          <motion.div variants={itemVariants} className="mb-6">
-            <OutlinePasswordField
-              label="Password"
-              name="password"
-              placeholder="......"
-              isRequired={true}
-              register={register}
-              error={errors.password?.message}
-            />
-          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+            <motion.div variants={itemVariants} className="mb-6">
+              <OutlinePasswordField
+                label="Password"
+                name="password"
+                placeholder="......"
+                isRequired={true}
+                register={register}
+                error={errors.password?.message}
+              />
+            </motion.div>
 
-          <motion.div variants={itemVariants} className="mb-8">
-            <OutlinePasswordField
-              label="Confirm Password"
-              name="confirmPassword"
-              isRequired={true}
-              placeholder="......"
-              register={register}
-              error={errors.confirmPassword?.message}
-            />
-          </motion.div>
+            <motion.div variants={itemVariants} className="mb-8">
+              <OutlinePasswordField
+                label="Confirm Password"
+                name="confirmPassword"
+                isRequired={true}
+                placeholder="......"
+                register={register}
+                error={errors.confirmPassword?.message}
+              />
+            </motion.div>
           </div>
 
           <motion.div variants={itemVariants}>
             <Button type="submit" disabled={isLoading}>
-              Next
+              Create Account
             </Button>
           </motion.div>
 

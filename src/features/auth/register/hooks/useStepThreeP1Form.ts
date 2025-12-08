@@ -10,6 +10,7 @@ import { useMentorOnboarding } from "@/contexts/MentorOnboardingContext";
 import { registerApi } from "../api/registerApi";
 import { getSkills } from "../utils/getSkills";
 import { log } from "node:console";
+import { useOnboarding } from "@/contexts/BoardingContext";
 
 export const useStepThreeP1Form = () => {
   const {
@@ -32,11 +33,11 @@ export const useStepThreeP1Form = () => {
     },
   });
   const { nextStep } = useRegisterSteps();
-  const { draft, setDraft } = useMentorOnboarding();
+  const { draft, setDraft } = useOnboarding();
 
   // hydrate form with persisted draft values
   React.useEffect(() => {
-    if (draft) {
+    if ("educationLevel" in draft || "institution" in draft || "fieldOfStudy" in draft || "currentYear" in draft) {
       const values = {
         educationLevel: (draft as any).educationLevel || "",
         university: (draft as any).institution || "",

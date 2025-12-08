@@ -8,7 +8,7 @@ import { Controller } from "react-hook-form";
 import { useStepThreeP2Form } from "../../hooks/useStepThreeP2StudentForm";
 
 const StepThreeP2StudentForm = () => {
-  const { handleSubmit, onSubmit, control, errors, isValid, isLoading } =
+  const { handleSubmit, onSubmit, control, errors, isValid, isLoading, skillsOptions,topicsOptions } =
     useStepThreeP2Form();
 
   return (
@@ -17,6 +17,28 @@ const StepThreeP2StudentForm = () => {
        onSubmit={handleSubmit(onSubmit)}
     >
         <SetupStepsFormHeader heading="Technical Details" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.05 }}
+        >
+          <Controller
+            control={control}
+            name="topics"
+            defaultValue={[]}
+            render={({ field }) => (
+              <TagsInput
+                label="Topics of Interest"
+                placeholder="No topics added yet"
+                value={field.value || []}
+                suggestions={topicsOptions.length > 0 ? topicsOptions : undefined}
+                onChange={(v) => field.onChange(v)}
+                error={errors?.topics?.message as any}
+              />
+            )}
+          />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -31,6 +53,7 @@ const StepThreeP2StudentForm = () => {
               <TagsInput
                 label="Your Skills"
                 placeholder="No skills added yet"
+                suggestions={skillsOptions.length > 0 ? skillsOptions : undefined}
                 value={field.value || []}
                 onChange={(v) => field.onChange(v)}
                 error={errors?.skills?.message as any}

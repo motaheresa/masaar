@@ -103,6 +103,26 @@ export type getLanguagesResponse = {
   };
 };
 
+export type TopicOption = {
+  id: string;
+  name: string;
+  description?: string;
+};
+
+export type getTopicsResponse = {
+  status: "success" | "error";
+  message: string;
+  data?: {
+    topics: TopicOption[];
+  };
+};
+
+export type PublicProfileResponse = {
+  status: "success" | "error";
+  message: string;
+  data?: any;
+};
+
 // ============================================
 // REGISTER API SERVICE
 // ============================================
@@ -217,6 +237,30 @@ export const registerApi = {
           error instanceof Error
             ? error.message
             : "An error occurred fetching languages",
+      };
+    }
+  },
+
+  // Get Topics Options
+  getTopics: async (): Promise<getTopicsResponse> => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/topics`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "force-cache"
+      });
+      const data = await res.json();
+      console.log("topics data", data);
+      return data;
+    } catch (error) {
+      return {
+        status: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "An error occurred fetching topics",
       };
     }
   },
@@ -393,7 +437,108 @@ export const registerApi = {
       };
     }
   },
+
+  // ============================================
+  // STUDENT ONBOARDING: Profile submission
+  // ============================================
+  studentProfile: async (data: {
+    phoneNumber?: string;
+    gender?: string;
+    country?: string;
+    bio?: string;
+    educationLevel?: string;
+    institutionName?: string;
+    major?: string;
+    yearOfStudy?: string;
+    graduationYear?: number;
+    learningMode?: string;
+    preferredDifficulty?: string;
+    linkedinUrl?: string;
+    githubUrl?: string;
+    skills?: Array<{ skillId: string; level: string }>;
+    topics?: Array<{ topicId: string }>;
+    languages?: Array<{ languageId: string; proficiency: string }>;
+  }): Promise<RegisterStep2Response> => {
+    try {
+      const token = localStorage.getItem("accessToken");
+
+      const response = await fetch(
+        `${API_BASE_URL}/api/student/onboarding/profile`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const result = await response.json();
+      console.log(result);
+
+      if (!response.ok) {
+        return {
+          status: "error",
+          message: result.message || "Failed to submit student profile",
+          errors: result.errors || undefined,
+        };
+      }
+
+      return result;
+    } catch (error) {
+      return {
+        status: "error",
+        message: error instanceof Error ? error.message : "An error occurred",
+      };
+    }
+  },
+
+  // ============================================
+  // PUBLIC PROFILE: shared public-facing profile (for both roles)
+  // ============================================
+  publicProfile: async (data: {
+    displayName?: string;
+    bio?: string;
+    country?: string;
+    avatarUrl?: string;
+    linkedinUrl?: string;
+    githubUrl?: string;
+  }): Promise<PublicProfileResponse> => {
+    try {
+      const token = localStorage.getItem("accessToken");
+
+      const response = await fetch(`${API_BASE_URL}/api/profile`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      console.log("public profile result", result);
+
+      if (!response.ok) {
+        return {
+          status: "error",
+          message: result.message || "Failed to submit public profile",
+        };
+      }
+
+      return result;
+    } catch (error) {
+      return {
+        status: "error",
+        message: error instanceof Error ? error.message : "An error occurred",
+      };
+    }
+  },
 };
+
+
+
 
 
 

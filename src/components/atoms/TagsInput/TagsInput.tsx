@@ -76,9 +76,14 @@ export const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
     const localRef = useRef<HTMLInputElement | null>(null);
 
     // Read API error from sessionStorage on mount and when name changes
+    // Clear it immediately so it doesn't persist on navigation back/forward
     useEffect(() => {
       const storedErr = sessionStorage.getItem(`api-error-${name}`);
-      setApiErr(storedErr);
+      if (storedErr) {
+        setApiErr(storedErr);
+        // Clear from sessionStorage immediately so it doesn't block form on revisit
+        sessionStorage.removeItem(`api-error-${name}`);
+      }
     }, [name]);
 
     const handleInputChange = () => {

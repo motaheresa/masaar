@@ -34,7 +34,7 @@ export const useStepThreeP5MentorForm = () => {
   const [uploadState, setUploadState] = useState<UploadState>("idle");
 
   const ERROR_MESSAGE =
-    "Invalid file. Please upload a PDF or DOCX file under 1MB.";
+    "Invalid file. Please upload a PDF file under 1MB.";
 
   const onSubmit = async (data: TStepThreeP5MentorFormData) => {
     setUploadState("uploading");
@@ -42,19 +42,23 @@ export const useStepThreeP5MentorForm = () => {
     try {
       const res = await registerApi.uploadMentorCV(data.cv!);
       console.log("CV Upload Response: ", res);
+          console.log( "one",res.message.length);
 
       if (res.status === "error") {
         setUploadState("error");
+        debugger
 
-        if (loadingId) {
+        if (loadingId) {       
           toast.update(loadingId, {
-            render: res.message || ERROR_MESSAGE,
+            render: res.message.length>50?res.message?.substring(50)+"...":res.message || ERROR_MESSAGE,
             type: "error",
             isLoading: false,
             autoClose: 4000,
           });
         } else {
-          toast.error(res.message || ERROR_MESSAGE, toastConfig.error);
+                    console.log( "one",res.message,"two",res.message.length,"three",res.message?.splice(50));
+
+          toast.error(res.message.length>50?res.message?.substring(50)+"...":res.message || ERROR_MESSAGE, toastConfig.error);
         }
 
         return false;
@@ -95,6 +99,7 @@ export const useStepThreeP5MentorForm = () => {
       }
       return true;
     } catch (err) {
+      
       setUploadState("error");
       const errMsg =
         err instanceof Error

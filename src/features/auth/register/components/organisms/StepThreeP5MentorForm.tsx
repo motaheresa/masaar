@@ -56,7 +56,7 @@ const StepThreeP5MentorForm: React.FC = () => {
               Drag & drop your CV here
             </h3>
             <p className="text-sm text-gray-600 mb-4">
-              Support formats: PDF,DOCX, Max Size : 1MB
+              Support formats: PDF, Max Size : 1MB
             </p>
             <button
               type="button"
@@ -68,7 +68,7 @@ const StepThreeP5MentorForm: React.FC = () => {
             <input
               ref={inputRef}
               type="file"
-              accept=".pdf,.doc,.docx"
+              accept=".pdf"
               onChange={handleInputChange}
               className="hidden"
               aria-label="Upload CV"

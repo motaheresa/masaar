@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegisterSteps } from "@/contexts/RegisterStepsContext";
 import { StepTwoSchema, TStepTwoeFormData } from "../schemas/StepTwoFormSchema";
 import { useMentorOnboarding } from "@/contexts/MentorOnboardingContext";
+import { useOnboarding } from "@/contexts/BoardingContext";
 
 export const useStepTwoForm = () => {
   const {
@@ -26,11 +27,11 @@ export const useStepTwoForm = () => {
     },
   });
   const { nextStep, prevStep } = useRegisterSteps();
-  const { draft, setDraft } = useMentorOnboarding();
+  const { draft, setDraft } = useOnboarding();
 
   // hydrate form from draft if available
   React.useEffect(() => {
-    if (draft) {
+    if ("gender" in draft || "phoneNumber" in draft || "country" in draft || "bio" in draft) {
       const values = {
         gender: draft.gender || "",
         phoneNumber: draft.phoneNumber || "",

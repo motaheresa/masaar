@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegisterSteps } from "@/contexts/RegisterStepsContext";
 import { useMentorOnboarding } from "@/contexts/MentorOnboardingContext";
+import { usePublicOnboarding } from "@/contexts/PublicOnboardingContext";
 import { registerApi } from "../api/registerApi";
 import { toast } from "react-toastify";
 import { toastConfig } from "@/config/toastConfig";
@@ -13,6 +14,7 @@ import {
 } from "../schemas/StepThreeP4FormSchema";
 import { useRouter } from "next/navigation";
 import { getLanguages } from "../utils/getLanguages";
+import { useOnboarding } from "@/contexts/BoardingContext";
 
 export type LanguageInput = {
   id: string;
@@ -44,8 +46,8 @@ export const useStepThreeP4Form = () => {
   });
 
   const { nextStep, goToStep } = useRegisterSteps();
-  const { draft, setDraft, clearDraft, setServerErrors } =
-    useMentorOnboarding();
+  const { draft, setDraft, clearDraft, setServerErrors } = useOnboarding();
+  const { setDraft: setPublicDraft } = usePublicOnboarding();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [languagesOptions, setLanguagesOptions] = React.useState<
     Array<{ id: string; name: string }>
@@ -289,6 +291,29 @@ export const useStepThreeP4Form = () => {
       }
 
       clearDraft();
+
+      // best-effort: also update public profile with shared fields
+      try {
+        setPublicDraft({
+          bio: (draft as any)?.bio || "",
+          country: (draft as any)?.country || undefined,
+          linkedinUrl: (payload as any)?.linkedinUrl || (draft as any)?.linkedinUrl,
+          githubUrl: (payload as any)?.githubUrl || (draft as any)?.githubUrl,
+        });
+
+        const publicPayload = {
+          bio: (draft as any)?.bio || "",
+          country: (draft as any)?.country || undefined,
+          linkedinUrl: (payload as any)?.linkedinUrl || (draft as any)?.linkedinUrl,
+          githubUrl: (payload as any)?.githubUrl || (draft as any)?.githubUrl,
+        };
+        const pubRes = await registerApi.publicProfile(publicPayload as any);
+        if (pubRes.status !== "success") {
+          console.warn("Public profile update failed:", pubRes.message || pubRes);
+        }
+      } catch (e) {
+        console.warn("Public profile update error:", e);
+      }
 
       // advance step after short delay
       setTimeout(() => router.push("/register/cv-upload?role=mentor"), 800);

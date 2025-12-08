@@ -3,11 +3,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegisterSteps } from "@/contexts/RegisterStepsContext";
 import { useMentorOnboarding } from "@/contexts/MentorOnboardingContext";
+import { usePublicOnboarding } from "@/contexts/PublicOnboardingContext";
 import {
   StepThreeP2MentorSchema,
   TStepThreeP2MentorFormData,
 } from "../schemas/StepThreeP2MentorFormSchema";
 import { getSkills } from "../utils/getSkills";
+import { useOnboarding } from "@/contexts/BoardingContext";
 
 export type SkillInput = {
   id: string;
@@ -37,7 +39,7 @@ export const useStepThreeP2MentorForm = () => {
   });
 
   const { nextStep } = useRegisterSteps();
-  const { draft, setDraft } = useMentorOnboarding();
+  const { draft, setDraft } = useOnboarding();
   const [skillsOptions, setSkillsOptions] = React.useState<
     Array<{ id: string; name: string }>
   >([]);
@@ -55,7 +57,7 @@ export const useStepThreeP2MentorForm = () => {
         console.log("Error fetching skills:", error);
       }
 
-      if (draft) {
+      if ("jobTitle" in draft || "yearsOfExperience" in draft || "skills" in draft) {
         const values = {
           jobTitle: Array.isArray((draft as any).jobTitle)
             ? (draft as any).jobTitle
@@ -96,7 +98,7 @@ export const useStepThreeP2MentorForm = () => {
   }, []);
 
   const onSubmit = (data: TStepThreeP2MentorFormData) => {
-    // persist into mentor draft
+    // persist into mentor draft (only mentor-specific fields)
     try {
       setDraft({
         jobTitle: Array.isArray(data.jobTitle)
@@ -105,14 +107,23 @@ export const useStepThreeP2MentorForm = () => {
         yearsOfExperience: data.yearsOfExperience
           ? parseInt(String(data.yearsOfExperience), 10)
           : undefined,
-        skills: Array.isArray(data.skills)
+      });
+
+      // Move skills into public draft to avoid duplication
+      try {
+        const publicSkills = Array.isArray(data.skills)
           ? data.skills.map((t) => ({
               skillId: String(t.id),
+              name: t.name,
               level: t.level || "INTERMEDIATE",
-              yearsOfExp: t.yearsOfExp || 0,
+              yearsOfExp: t.yearsOfExp || undefined,
             }))
-          : [],
-      });
+          : [];
+
+        (setDraft as any)?.({ skills: publicSkills });
+      } catch (e) {
+        // ignore
+      }
     } catch (e) {
       // ignore mapping errors
     }

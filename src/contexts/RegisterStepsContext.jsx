@@ -1,10 +1,14 @@
 // contexts/RegisterStepsContext.jsx
 "use client";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const RegisterStepsContext = createContext();
 
 export const RegisterStepsProvider = ({ children }) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [step, setStep] = useState(() => {
     if (typeof window !== "undefined") {
       const savedStep = sessionStorage.getItem("registerStep");
@@ -12,6 +16,14 @@ export const RegisterStepsProvider = ({ children }) => {
     }
     return 1;
   });
+
+  // Sync step with URL query parameter on mount and when URL changes
+  useEffect(() => {
+    const stepParam = searchParams.get("step");
+    if (stepParam) {
+      setStep(Number(stepParam));
+    }
+  }, [searchParams]);
 
   const nextStep = (stepVal = 1) => {
     setStep((prevStep) => {
@@ -41,14 +53,17 @@ export const RegisterStepsProvider = ({ children }) => {
       sessionStorage.removeItem("registerStep");
     }
   };
+
+  // Update URL and sessionStorage when step changes
   useEffect(() => {
     if (typeof window !== "undefined") {
       sessionStorage.setItem("registerStep", String(step));
     }
-    return () => {
-      clearRegistrationProgress();
-    };
-  }, [step]);
+    // Preserve existing query params and add/update step param
+    const params = new URLSearchParams(window.location.search);
+    params.set("step", String(step));
+    router.push(`?${params.toString()}`);
+  }, [step, router]);
 
   return (
     <RegisterStepsContext.Provider

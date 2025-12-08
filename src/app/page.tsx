@@ -1,13 +1,26 @@
-import Link from "next/link";
+import Footer from "@/components/organisms/Footer";
+import GuestHeader from "@/features/guest/components/sections/GuestHeader";
+import { HeroSection, SearchSection, TopRatedMentorsSection, WhyChooseMasaarSection, StoriesSection, CTASection } from "@/features/guest/components/sections";
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1>Guest Mode</h1>
-      <div className="space-x-10">
-        <Link href={"/login"}>Login</Link>
-        <Link href={"/register/role-selection"}>Register</Link>
-      </div>
+    <div className="font-family-secondary flex flex-col min-h-screen">
+      {/* Header */}
+      <GuestHeader />
+
+      {/* Main Content */}
+      <main className="bg-light-gray flex-1">
+        <HeroSection />
+        <SearchSection />
+        <TopRatedMentorsSection />
+        <WhyChooseMasaarSection />
+        <StoriesSection />
+        <CTASection />
+      </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
+

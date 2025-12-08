@@ -1,0 +1,219 @@
+ 'use client';
+// import { Star, Search, Menu, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
+
+export default function LandingPage() {
+  const mentors = [
+    { name: "John Doe", title: "Full-Stack Developer", rating: 4.9, reviews: 43, desc: "Expert at front-end and back-end development" },
+    { name: "Jane Smith", title: "React Developer", rating: 5.0, reviews: 60, desc: "Expert at React JavaScript Framework" },
+    { name: "Samuel Lee", title: "Node.js Developer", rating: 4.8, reviews: 30, desc: "Expert at Node.js JavaScript Backend environment" },
+    { name: "John Doe", title: "Full-Stack Developer", rating: 4.9, reviews: 43, desc: "Expert at front-end and back-end development" },
+  ];
+
+  return (
+    <>
+      {/* Navbar */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+
+            {/* Logo Left */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">م</span>
+              </div>
+              <span className="text-2xl font-bold text-teal-600">مسارك</span>
+            </div>
+
+            {/* Desktop Menu */}
+            <nav className="hidden md:flex items-center gap-10">
+              <a href="#" className="text-gray-700 hover:text-teal-600 font-medium transition">Find a mentor</a>
+              <a href="#" className="text-gray-700 hover:text-teal-600 font-medium transition">How it works</a>
+              <a href="#" className="text-gray-700 hover:text-teal-600 font-medium transition">Become a mentor</a>
+            </nav>
+
+            {/* Desktop Buttons */}
+            <div className="hidden md:flex items-center gap-4">
+              <button className="text-gray-700 hover:text-teal-600 font-medium px-4">Login</button>
+              <button className="bg-teal-500 hover:bg-teal-600 text-white font-semibold px-8 py-3 rounded-full">Sign up</button>
+            </div>
+
+            {/* Mobile Menu */}
+            <div className="flex items-center gap-4 md:hidden">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-teal-500 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">م</span>
+                </div>
+                <span className="text-xl font-bold text-teal-600">مسارك</span>
+              </div>
+              <button className="p-2">
+                {/* <Menu className="w-6 h-6" /> */}
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main className="pt-20">
+
+        {/* Hero Section */}
+        <section className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 flex items-center">
+          <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
+                Unlock Your Coding Potential
+              </h1>
+              <p className="text-xl text-gray-600 mb-8">
+                Connect with experts mentors and innovate more!
+              </p>
+              <button className="bg-[#06b6a4] hover:bg-[#08917a] text-white font-bold py-5 px-16 rounded-full text-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                Find Your Mentor
+              </button>
+            </div>
+            <div className="flex justify-center">
+              <div className="w-96 h-96 bg-gradient-to-br from-teal-200 to-cyan-300 rounded-full blur-3xl opacity-50"></div>
+            </div>
+          </div>
+        </section>
+
+        {/* Search Section */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl font-bold text-gray-800 mb-12">Find The Perfect Mentor For You</h2>
+            <div className="max-w-2xl mx-auto relative">
+              <input
+                type="text"
+                placeholder="Search by Language, Skills, Name... ( e.g JavaScript, React )"
+                className="w-full px-6 py-5 pr-16 rounded-full border border-gray-300 text-lg focus:outline-none focus:border-teal-500 shadow-lg"
+              />
+              {/* <Search className="absolute right-6 top-6 w-7 h-7 text-gray-400" /> */}
+            </div>
+          </div>
+        </section>
+
+        {/* Top Mentors */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold text-center text-gray-800 mb-4">Meet Our Top-Rated Mentors</h2>
+            <div className="w-24 h-1 bg-teal-500 mx-auto mb-16"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {mentors.map((mentor) => (
+                <div key={mentor.name} className="bg-white rounded-2xl shadow-xl p-8 text-center hover:shadow-2xl transition">
+                  <div className="w-28 h-28 mx-auto mb-6 rounded-full bg-gray-200 border-4 border-teal-100"></div>
+                  <h3 className="text-xl font-bold text-gray-800">{mentor.name}</h3>
+                  <p className="text-teal-600 font-medium mb-3">{mentor.title}</p>
+                  <div className="flex justify-center gap-1 mb-4">
+                    {/* {[...Array(5)].map((_, i) => (
+                      <Star key={i} className={`w-5 h-5 ${i < Math.floor(mentor.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`} />
+                    ))} */}
+                    <span className="ml-2 text-gray-600">({mentor.reviews})</span>
+                  </div>
+                  <p className="text-sm text-gray-500">{mentor.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Masaark */}
+        <section className="py-24 bg-gray-50">
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Why choose Masaark?</h2>
+            <div className="w-24 h-1 bg-teal-500 mx-auto mb-16"></div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+              {[
+                { icon: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z", title: "Personalized Guidance" },
+                { icon: "M13 10V3L4 14h7v7l9-11h-7z", title: "Career Growth" },
+                { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", title: "Flexible Scheduling" },
+              ].map((item) => (
+                <div key={item.title} className="flex flex-col items-center">
+                  <div className="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mb-6">
+                    <svg className="w-10 h-10 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-3">{item.title}</h3>
+                  <p className="text-gray-600">Expert guidance tailored to your goals</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Community Stories */}
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Stories From Our Community</h2>
+            <div className="w-24 h-1 bg-teal-500 mx-auto mb-16"></div>
+            <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+              {[1, 2].map(() => (
+                <div className="bg-gray-50 rounded-2xl p-8 shadow-lg border">
+                  <p className="text-gray-700 italic text-lg mb-6">
+                    "I'm John Doe I was confusing while doing my project and when I heard about masaark I was excited to gain more experience with it mentors"
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-gray-300"></div>
+                    <div>
+                      <p className="font-semibold">John Doe</p>
+                      <p className="text-sm text-teal-600">Node.js</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-center gap-4 mt-10">
+              {/* <button className="w-12 h-12 rounded-full bg-teal-100 hover:bg-teal-200"><ChevronLeft className="w-6 h-6 text-teal-600 mx-auto" /></button> */}
+              {/* <button className="w-12 h-12 rounded-full bg-teal-500 hover:bg-teal-600"><ChevronRight className="w-6 h-6 text-white mx-auto" /></button> */}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-24 bg-gradient-to-r from-teal-50 to-cyan-50">
+          <div className="container mx-auto px-6 text-center">
+            <div className="max-w-3xl mx-auto bg-teal-100 rounded-3xl p-12 shadow-xl">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Ready To Start Your Journey?</h2>
+              <p className="text-lg text-gray-600 mb-10">Join thousands of developers growing with expert mentors</p>
+              <button className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-5 px-16 rounded-full text-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                Browse Mentors
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="bg-white border-t border-gray-200 py-16">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">م</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-teal-600">مسارك</h3>
+                </div>
+                <p className="text-gray-600 text-sm">Your path to mastery in touch</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-5">Product</h4>
+                <ul className="space-y-3 text-gray-600"><li><a href="#" className="hover:text-teal-600">Find a mentor</a></li><li><a href="#" className="hover:text-teal-600">Become a mentor</a></li><li><a href="#" className="hover:text-teal-600">Pricing</a></li></ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-5">Support</h4>
+                <ul className="space-y-3 text-gray-600"><li><a href="#" className="hover:text-teal-600">FAQ</a></li><li><a href="#" className="hover:text-teal-600">Contact Us</a></li></ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-5">Legal</h4>
+                <ul className="space-y-3 text-gray-600"><li><a href="#" className="hover:text-teal-600">Terms of Service</a></li><li><a href="#" className="hover:text-teal-600">Privacy Policy</a></li></ul>
+              </div>
+            </div>
+            <div className="mt-16 pt-8 border-t text-center text-gray-500 text-sm">
+              © 2025 Masaark. All rights reserved
+            </div>
+          </div>
+        </footer>
+
+      </main>
+    </>
+  );
+}

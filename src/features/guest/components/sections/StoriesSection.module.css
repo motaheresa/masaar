@@ -1,0 +1,58 @@
+/* Swiper Custom Styles */
+.storiesSwiper {
+  padding-bottom: 60px;
+  padding-top: 20px;
+}
+
+.storiesSwiper .swiper-pagination {
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.storiesSwiper .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #e5e7eb;
+  opacity: 1;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.storiesSwiper .swiper-pagination-bullet-active {
+  background-color: var(--color-primary);
+  width: 32px;
+  border-radius: 6px;
+}
+
+.storiesSwiper .swiper-slide {
+  display: flex;
+  align-items: stretch;
+}
+
+.storiesNavButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #50a8b4;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 16px;
+}
+
+.storiesNavButton:hover {
+  background-color: #3d8a96;
+  transform: scale(1.1);
+}
+
+.storiesNavButton:disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+  transform: scale(1);
+}

@@ -30,3 +30,13 @@ jobTitle (array✅)
 gender (required✅)
 phoneNumber (required✅)
 bio (optional✅)
+
+
+// before going
+after 3.4 page mentorOnBoarding should be deleted 
+student process 
+forgot process
+
+// new
+
+complete process of student and remove unused code

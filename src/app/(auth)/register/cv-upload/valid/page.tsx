@@ -145,7 +145,7 @@ const CvValidPage = () => {
               className="flex gap-3 mb-4"
             >
               <Button
-                onClick={() => router.push("/profile")}
+                onClick={() => router.replace("/register/success?role=mentor")}
                 className="flex-1 py-2 text-sm"
               >
                 Finish

@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegisterSteps } from "@/contexts/RegisterStepsContext";
 import { useMentorOnboarding } from "@/contexts/MentorOnboardingContext";
 import { StepThreeP3Schema, TStepThreeP3FormData } from "../schemas/StepThreeP3FormSchema";
+import { useOnboarding } from "@/contexts/BoardingContext";
 
 export const useStepThreeP3Form = () => {
   const {
@@ -27,11 +28,11 @@ export const useStepThreeP3Form = () => {
   });
 
   const { nextStep } = useRegisterSteps();
-  const { draft, setDraft } = useMentorOnboarding();
+  const { draft, setDraft } = useOnboarding();
 
   // hydrate from draft on mount
   React.useEffect(() => {
-    if (draft) {
+    if ("avatar" in draft || "startTime" in draft || "endTime" in draft || "preferredDifficulty" in draft) {
       const values = {
         avatar: (draft as any).avatar || (draft as any).photo || "",
         startTime: (draft as any).startTime || "",

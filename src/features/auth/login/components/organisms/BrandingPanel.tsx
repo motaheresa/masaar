@@ -8,7 +8,7 @@ export const BrandingPanel = () => {
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
-      className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary to-primary-hover items-center justify-center p-12"
+      className="hidden lg:flex lg:w-1/2 rounded-r-2xl bg-gradient-to-br from-primary to-primary-hover items-center justify-center p-12"
     >
       <div className="text-center text-white">
         <motion.div 
