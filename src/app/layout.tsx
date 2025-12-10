@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
 import "../styles/globals.css";
 import { ToastContainer } from 'react-toastify';
+import { Analytics } from '@vercel/analytics/next';
 
 
 const BaseFont= Roboto_Slab({
@@ -25,6 +26,7 @@ export default function RootLayout({
       >
         <ToastContainer position="top-center" />
         {children}
+        <Analytics />
       </body>
     </html>
   );
