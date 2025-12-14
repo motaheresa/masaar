@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-// import HeroLottieImage from "@/assets/images/student with laptop.gif";
+import HeroLottieImage from "@/assets/images/student with laptop.gif";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export const HeroLottie = () => {
