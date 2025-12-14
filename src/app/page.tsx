@@ -1,6 +1,6 @@
 "use server";
 import Footer from "@/components/organisms/Footer";
-import GuestHeader from "@/features/guest/components/sections/GuestHeader";
+import { GuestHeader } from "@/features/guest/components/organisms";
 import {
   HeroSection,
   SearchSection,
@@ -8,7 +8,7 @@ import {
   WhyChooseMasaarSection,
   StoriesSection,
   CTASection,
-} from "@/features/guest/components/sections";
+} from "@/features/guest/components/organisms";
 
 export default async function LandingPage() {
   return (
