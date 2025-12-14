@@ -1,8 +1,16 @@
+"use server";
 import Footer from "@/components/organisms/Footer";
 import GuestHeader from "@/features/guest/components/sections/GuestHeader";
-import { HeroSection, SearchSection, TopRatedMentorsSection, WhyChooseMasaarSection, StoriesSection, CTASection } from "@/features/guest/components/sections";
+import {
+  HeroSection,
+  SearchSection,
+  TopRatedMentorsSection,
+  WhyChooseMasaarSection,
+  StoriesSection,
+  CTASection,
+} from "@/features/guest/components/sections";
 
-export default function LandingPage() {
+export default async function LandingPage() {
   return (
     <div className="font-family-secondary flex flex-col min-h-screen">
       {/* Header */}
@@ -23,4 +31,3 @@ export default function LandingPage() {
     </div>
   );
 }
-
