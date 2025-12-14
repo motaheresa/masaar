@@ -43,7 +43,7 @@ export const GuestHeader = () => {
           </nav>
 
           {/* Auth Buttons */}
-          {/* <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4">
             <Link
               href="/login"
               className="block hover:bg-primary text-center duration-500 font-bold! py-2 min-w-28 hover:outline-1 outline-primary text-primary rounded-none! rounded-tr-lg! rounded-bl-lg! hover:text-white"
@@ -56,7 +56,7 @@ export const GuestHeader = () => {
             >
               Sign up
             </Link>
-          </div> */}
+          </div>
         </div>
 
         {/* Mobile Menu Button - Visible only on mobile */}
