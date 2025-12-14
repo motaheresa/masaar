@@ -1,4 +1,4 @@
-export { default as HeroSection } from "./HeroSection";
+export { HeroSection } from "./HeroSection";
 export { default as SearchSection } from "./SearchSection";
 export { default as TopRatedMentorsSection } from "./TopRatedMentorsSection";
 export { default as WhyChooseMasaarSection } from "./WhyChooseMasaarSection";
