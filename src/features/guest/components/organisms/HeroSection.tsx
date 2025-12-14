@@ -5,7 +5,7 @@ import { HeroLottie } from "./HeroLottie";
 
 export const HeroSection = async () => {
   return (
-    <section className="min-h-screen flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 px-6 md:px-12 lg:px-24 py-12 md:py-20 animate-fade-in">
+    <section className="min-h-screen flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 px-6 md:px-12 lg:px-24 pt-24 md:pt-12 pb-12 md:py-20 animate-fade-in">
       {/* Left Side (Text Content) */}
       <div className="flex-1 flex flex-col gap-6 animate-slide-up">
         <div className="animate-slide-up" style={{ animationDelay: "0.1s" }}>

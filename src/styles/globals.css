@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* Import theme tokens */
+@import "./shadcnTheme.css";
 @import "./tokens/theme.css";
 
 /* Import root-level CSS variables (gradients, shadows) */
@@ -14,7 +15,6 @@ body {
   background: var(--color-white);
   color: var(--color-text);
 }
-
 
 button {
   transition: 0.3s ease-in-out;
@@ -144,6 +144,3 @@ input[type="radio"].form-radio:focus-visible {
   animation: scale-in 0.8s ease-out forwards;
   opacity: 0;
 }
-
-
-
