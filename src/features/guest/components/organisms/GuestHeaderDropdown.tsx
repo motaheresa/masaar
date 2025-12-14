@@ -13,35 +13,37 @@ import Link from "next/link"
 export function GuestHeaderDropdown() {
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (open) {
-        setOpen(false);
-      }
-    };
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       if (open) {
+//         setOpen(false);
+//       }
+//     };
 
-    if (open) {
-      window.addEventListener("scroll", handleScroll, { passive: true });
-    }
+//     if (open) {
+//       window.addEventListener("scroll", handleScroll, { passive: true });
+//     }
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [open]);
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, [open]);
   
   return (
     <>
       <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
         <DropdownMenuTrigger asChild>
           <Button 
-            className="relative bg-transparent shodow-none md:hidden" 
+            className="relative bg-transparent shodow-primary md:hidden" 
             variant="outline" 
             aria-label="Open menu" 
-            size="icon-sm"
+            size="icon-lg"
+            
+            
           >
             <FiMenu
-              size={40}
-              className={`absolute text-gray-800 transition-all duration-300 ${
+            //   size={50}
+              className={`w-7! h-7! absolute text-primary transition-all duration-300 ${
                 open
                   ? "opacity-0 rotate-90 scale-0"
                   : "opacity-100 rotate-0 scale-100"
@@ -49,7 +51,7 @@ export function GuestHeaderDropdown() {
             />
             <FiX
               size={40}
-              className={`absolute text-gray-800 transition-all duration-300 ${
+              className={`absolute w-7! h-7! text-gray-800 transition-all duration-300 ${
                 open
                   ? "opacity-100 rotate-0 scale-100"
                   : "opacity-0 -rotate-90 scale-0"
