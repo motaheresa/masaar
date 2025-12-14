@@ -48,7 +48,7 @@ export const StoriesSection = () => {
         </div>
 
         <div className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
-          {/* <StoriesSectionClient testimonials={TESTIMONIALS_DATA} /> */}
+          <StoriesSectionClient testimonials={TESTIMONIALS_DATA} />
         </div>
       </div>
     </section>
