@@ -31,7 +31,7 @@ export function GuestHeaderDropdown() {
   
   return (
     <>
-      <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
+      <DropdownMenu open={open} onOpenChange={setOpen} modal>
         <DropdownMenuTrigger asChild>
           <Button 
             className="relative bg-transparent shodow-primary md:hidden" 
