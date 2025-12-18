@@ -15,7 +15,7 @@ export const SearchSection = () => {
         </div>
 
         <div className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
-          {/* <SearchSectionClient /> */}
+          <SearchSectionClient />
         </div>
       </div>
     </section>
