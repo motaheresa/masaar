@@ -9,7 +9,7 @@ export const HeroSection = async () => {
       {/* Left Side (Text Content) */}
       <div className="flex-1 flex flex-col gap-6 animate-slide-up">
         <div className="animate-slide-up" style={{ animationDelay: "0.1s" }}>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-5 leading-tight">
+          <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold sm:font-extrabold text-gray-800 mb-5 leading-tight">
             Unlock Your <span className="text-primary">Coding</span>
             <br />
             <span className="text-primary">Potential</span>
@@ -22,7 +22,7 @@ export const HeroSection = async () => {
         <div className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
           <Link
             href="/register/role-selection"
-            className="inline-block bg-primary text-white font-extrabold py-4 px-8 rounded-tl-lg rounded-br-lg rounded-bl-md rounded-tr-none hover:bg-primary/90 transition-colors duration-300"
+            className="inline-block bg-primary text-white font-bold sm:font-extrabold py-4 px-8 rounded-tl-lg rounded-br-lg rounded-bl-md rounded-tr-none hover:bg-primary/90 transition-colors duration-300"
           >
             Find Your Mentor
           </Link>
