@@ -4,7 +4,7 @@ import { LuLayoutDashboard, LuFolderOpen, LuBell } from "react-icons/lu";
 
 const HomeNavbar = () => {
     return (
-        <div className=" sticky top-0 z-10 w-full animate-fade-in">
+        <div className=" sticky border-b shadow-md top-0 z-10 w-full animate-fade-in">
             <NavbarLayout>
                 {/* Desktop Navigation - Hidden on mobile */}
                 <div className="hidden md:flex items-center gap-6">
