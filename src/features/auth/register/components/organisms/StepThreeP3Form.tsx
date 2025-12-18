@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+
 import SetupStepsFormHeader from "../molecules/SetupStepsFormHeader";
 import SetupStepsFormBtns from "../molecules/SetupStepsFormBtns";
 import { useStepThreeP3Form } from "../../hooks/useStepThreeP3Form";
@@ -27,10 +27,9 @@ const StepThreeP3Form = () => {
       <SetupStepsFormHeader heading="Availability Details" className="text-center sm:text-left" />
 
       {/* Profile Photo Upload */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.05 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.05s' }}
       >
         <ImageUpload
           label="Profile Photo"
@@ -43,13 +42,12 @@ const StepThreeP3Form = () => {
             })
           }
         />
-      </motion.div>
+      </div>
 
       {/* Available Hours */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.12 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.12s' }}
       >
         <label className="block text-sm font-semibold text-gray-800 mb-2">
           Your Available Hours
@@ -59,13 +57,12 @@ const StepThreeP3Form = () => {
           <TimeInput label="Start Time" name="startTime" register={register} />
           <TimeInput label="End Time" name="endTime" register={register} />
         </div>
-      </motion.div>
+      </div>
 
       {/* Preferred Project Difficulty */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.18 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.18s' }}
       >
         <label className="block text-sm font-semibold text-gray-800 mb-2">
           Preferred Project Difficulty
@@ -80,21 +77,19 @@ const StepThreeP3Form = () => {
             return (
               <label
                 key={opt.value}
-                className={`w-full sm:flex-1 border rounded-md p-3 cursor-pointer ${
-                  selected
-                    ? "ring-2 ring-primary border-primary"
-                    : "border-gray-200"
-                }`}
+                className={`w-full sm:flex-1 border rounded-md p-3 cursor-pointer ${selected
+                  ? "ring-2 ring-primary border-primary"
+                  : "border-gray-200"
+                  }`}
               >
                 <div className="flex items-center justify-center gap-3">
                   <input
                     type="radio"
                     value={opt.value}
                     {...register("preferredDifficulty")}
-                    className={`form-radio h-4 w-4 ${
-                      selected ? "text-primary" : "text-gray-400"
-                    } ${errors.preferredDifficulty ? "border-red-500" : ""}`}
-                    
+                    className={`form-radio h-4 w-4 ${selected ? "text-primary" : "text-gray-400"
+                      } ${errors.preferredDifficulty ? "border-red-500" : ""}`}
+
                     aria-hidden={false}
                   />
                   <div className="text-sm font-medium">{opt.label}</div>
@@ -103,7 +98,7 @@ const StepThreeP3Form = () => {
             );
           })}
         </div>
-      </motion.div>
+      </div>
 
       <SetupStepsFormBtns
         disabled={!isValid}

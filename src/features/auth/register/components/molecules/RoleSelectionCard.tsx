@@ -2,7 +2,7 @@
 "use client";
 import React from "react";
 import Image, { StaticImageData } from "next/image";
-import { motion } from "framer-motion";
+
 import { useRouter } from "next/navigation";
 
 type RoleSelectionCardProps = {
@@ -27,30 +27,16 @@ const RoleSelectionCard = ({
   };
 
   return (
-    <motion.button
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.2,
-        delay: 0,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      whileHover={{
-        y: -8,
-        transition: { duration: 0.3 },
-      }}
-      whileTap={{ scale: 0.98 }}
+    <button
       onClick={handleRoleSelect}
-      className="w-full max-w-[400px] shadow-lg  md:text-start text-center group md:min-h-[280px] px-8 md:py-10 py-4 bg-white rounded-2xl cursor-pointer transition-shadow duration-300 hover:shadow-2xl group flex flex-col"
+      className="w-full max-w-[400px] shadow-lg  md:text-start text-center group md:min-h-[280px] px-8 md:py-10 py-4 bg-white rounded-2xl cursor-pointer transition-shadow duration-300 hover:shadow-2xl group flex flex-col hover:-translate-y-2 hover:scale-[1.01] active:scale-[0.98] transition-transform animate-scale-in"
       style={{
         // boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
       }}
     >
       {/* Icon */}
-      <motion.div
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        transition={{ duration: 0.3 }}
-        className="md:mb-6 mb-3 w-fit mx-auto md:mx-0"
+      <div
+        className="md:mb-6 mb-3 w-fit mx-auto md:mx-0 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300"
       >
         <Image
           src={Img}
@@ -59,7 +45,7 @@ const RoleSelectionCard = ({
           alt={title}
           className="object-contain md:w-14 md:h-14 w-10 h-10"
         />
-      </motion.div>
+      </div>
 
       {/* Title */}
       <h2 className="font-bold md:text-2xl sm:text-xl text-lg text-gray-900 mb-3 group-hover:text-primary transition-colors duration-300">
@@ -72,9 +58,9 @@ const RoleSelectionCard = ({
       </p>
 
       <div className="h-1 bg-gray-200 relative rounded-full md:mt-6 mt-2 overflow-hidden hidden md:flex">
-  <div className="absolute left-0 top-0 h-full w-full bg-primary origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />
-</div>
-    </motion.button>
+        <div className="absolute left-0 top-0 h-full w-full bg-primary origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />
+      </div>
+    </button>
   );
 };
 

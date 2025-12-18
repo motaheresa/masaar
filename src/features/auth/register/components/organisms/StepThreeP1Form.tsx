@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+
 import { OutlineTextField } from "@/components/molecules/form/Input/TextField";
 import { SelectBox } from "@/components/atoms/Select/SelectBox";
 import { useStepThreeP1Form } from "../../hooks/useStepThreeP1Form";
@@ -18,16 +18,15 @@ const StepThreeP1Form = () => {
     { value: "BOOTCAMP", label: "Bootcamp" },
     { value: "SELF_TAUGHT", label: "Self Taught" },
   ];
-  
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <SetupStepsFormHeader heading="Education Details" className="text-center sm:text-left" />
       {/* Education Level */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.1s' }}
       >
         <SelectBox
           label="Education Level"
@@ -38,14 +37,13 @@ const StepThreeP1Form = () => {
           isRequired={true}
           options={educationLevelOptions}
         />
-      </motion.div>
+      </div>
 
       {/* University and Major - side-by-side on md+ */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.15 }}
+        <div
+          className="animate-slide-up"
+          style={{ animationDelay: '0.15s' }}
         >
           <OutlineTextField
             label="University or Institute"
@@ -55,12 +53,11 @@ const StepThreeP1Form = () => {
             error={errors.university?.message}
             isRequired={true}
           />
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.18 }}
+        <div
+          className="animate-slide-up"
+          style={{ animationDelay: '0.18s' }}
         >
           <OutlineTextField
             label="Major"
@@ -70,14 +67,13 @@ const StepThreeP1Form = () => {
             error={errors.major?.message}
             isRequired={true}
           />
-        </motion.div>
+        </div>
       </div>
 
       {/* Current Year of Study */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.25 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.25s' }}
       >
         <OutlineTextField
           label="Current Year of Study"
@@ -87,7 +83,7 @@ const StepThreeP1Form = () => {
           error={errors.currentYear?.message}
           isRequired={true}
         />
-      </motion.div>
+      </div>
 
       <SetupStepsFormBtns disabled={!isValid} loading={isLoading} backStepVal={1.1} />
     </form>

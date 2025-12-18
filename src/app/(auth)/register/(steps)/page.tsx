@@ -13,7 +13,7 @@ import StepThreeP4Form from "@/features/auth/register/components/organisms/StepT
 import StepThreeP5StudentForm from "@/features/auth/register/components/organisms/StepThreeP5StudentForm";
 import StepThreeP5MentorForm from "@/features/auth/register/components/organisms/StepThreeP5MentorForm";
 import { MentorOnboardingProvider } from "@/contexts/MentorOnboardingContext";
-import { motion, AnimatePresence } from "framer-motion";
+
 import { Button } from "@/components/atoms/Button/Button";
 
 const headers = {
@@ -30,17 +30,6 @@ const RegisterPage = () => {
   const router = useRouter();
 
   const { step }: { step: number } = useRegisterSteps();
-  const headerVariants = {
-    initial: { opacity: 0, x: 24, y: 0 },
-    animate: { opacity: 1, x: 0, y: 0, transition: { duration: 0.22 } },
-    exit: { opacity: 0, x: -24, transition: { duration: 0.18 } },
-  };
-
-  const progressAreaVariants = {
-    initial: { opacity: 0, y: 8 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.18 } },
-    exit: { opacity: 0, y: 8, transition: { duration: 0.14 } },
-  };
 
   const role = useSearchParams().get("role");
   if (!role || (role != "mentor" && role != "student")) {
@@ -60,37 +49,30 @@ const RegisterPage = () => {
   }
 
   const registerToken = localStorage.getItem("accessToken");
-  if (!registerToken&&step > 2 ) {
+  if (!registerToken && step > 2) {
     router.replace("/register/role-selection");
     return null;
   }
 
   return (
     <div
-      className={`flex-1 w-full flex items-center justify-center p-6 sm:p-8 lg:p-12 py-0! ${
-        step > 2 ? "bg-gray-50" : "bg-white"
-      }`}
+      className={`flex-1 w-full flex items-center justify-center p-6 sm:p-8 lg:p-12 py-0! ${step > 2 ? "bg-gray-50" : "bg-white"
+        }`}
     >
       <MentorOnboardingProvider>
         <div className="w-full pt-6 pb-8">
           {/* Page Header */}
-          <AnimatePresence mode="wait">
-            {step <= 2 && (
-              <motion.div
-                key={`header-${step}`}
-                // custom={direction}
-                variants={headerVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-              >
-                <SignupStepHeader
-                  header={headers?.[step]?.header}
-                  subHeader={headers?.[step]?.subHeader}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {step <= 2 && (
+            <div
+              key={`header-${step}`}
+              className="animate-slide-right"
+            >
+              <SignupStepHeader
+                header={headers?.[step]?.header}
+                subHeader={headers?.[step]?.subHeader}
+              />
+            </div>
+          )}
 
           {step == 1 && <StepOneForm />}
           {step == 2 && <StepTwoForm />}
@@ -99,20 +81,14 @@ const RegisterPage = () => {
           {step > 2 && (
             <div className="bg-white rounded-md w-full max-w-2xl mx-auto px-4 sm:px-8 md:px-10 py-5 shadow-xl">
               {/* Header ( Progress Bar ) */}
-              <AnimatePresence mode="wait">
-                {step >= 3 && (
-                  <motion.div
-                    key={`progress-${step}`}
-                    variants={progressAreaVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    className="mt-6 mb-10 px-4 md:px-0"
-                  >
-                    <ProgressStep step={step} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {step >= 3 && (
+                <div
+                  key={`progress-${step}`}
+                  className="mt-6 mb-10 px-4 md:px-0 animate-slide-up"
+                >
+                  <ProgressStep step={step} />
+                </div>
+              )}
               {step == 3.1 && <StepThreeP1Form />}
               {step == 3.2 && role == "student" && <StepThreeP2StudentForm />}
               {step == 3.2 && role == "mentor" && <StepThreeP2MentorForm />}

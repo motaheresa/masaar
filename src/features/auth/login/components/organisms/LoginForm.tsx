@@ -1,4 +1,4 @@
-// src/components/organisms/LoginForm.tsx
+"use client"
 import React from "react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
@@ -9,49 +9,28 @@ import { Button } from "@/components/atoms/Button/Button";
 import { FormDivider } from "@/components/molecules/form/FormDivider";
 import { LoginFormData } from "../../schemas/loginSchema";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useLogin } from "../../hooks/useLogin";
 
-type LoginFormProps = {
-  onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
-  isLoading: boolean;
-  register: UseFormRegister<LoginFormData>;
-  watch: (name: keyof LoginFormData) => string;
-  errors: FieldErrors<LoginFormData>;
-  onGoogleSignIn?: () => void;
-  onGithubSignIn?: () => void;
-  onForgotPassword?: () => void;
-  onSignupClick?: () => void;
-};
 
-export const LoginForm = ({
-  onSubmit,
-  isLoading,
-  register,
-  watch,
-  errors,
-  onGoogleSignIn,
-  onGithubSignIn,
-  onForgotPassword,
-  onSignupClick,
-}: LoginFormProps) => {
+export const LoginForm = () => {
+  const { register, handleSubmit, errors, isLoading } = useLogin();
+
   const handleGoogleSignIn = () => {
     console.log("Google Sign In clicked");
-    onGoogleSignIn?.();
+    // TODO: Implement Google OAuth
   };
 
   const handleGithubSignIn = () => {
     console.log("GitHub Sign In clicked");
-    onGithubSignIn?.();
+    // TODO: Implement GitHub OAuth
   };
 
   return (
-    <form onSubmit={onSubmit} className="w-full">
+    <form onSubmit={handleSubmit} className="w-full block">
       {/* Email Field */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        className="mb-6"
+      <div
+        className="mb-6 animate-slide-up"
+        style={{ animationDelay: '0.1s' }}
       >
         <OutlineTextField
           label="Email"
@@ -61,14 +40,12 @@ export const LoginForm = ({
           register={register}
           error={errors.email?.message}
         />
-      </motion.div>
+      </div>
 
       {/* Password Field */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-        className="mb-6"
+      <div
+        className="mb-6 animate-slide-up"
+        style={{ animationDelay: '0.2s' }}
       >
         <OutlinePasswordField
           label="Password"
@@ -77,46 +54,36 @@ export const LoginForm = ({
           register={register}
           error={errors.password?.message}
         />
-      </motion.div>
+      </div>
 
       {/* Forgot Password Link */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.25 }}
-        className="text-right mb-6"
+      <div
+        className="text-right mb-6 animate-slide-up"
+        style={{ animationDelay: '0.25s' }}
       >
         <Link
           href="/login/forgot-password/identify"
-          // onClick={(e) => {
-          //   e.preventDefault();
-          //   onForgotPassword?.();
-          // }}
           className="text-sm text-primary hover:underline hover:text-primary-hover transition-colors"
         >
           Forgot Your Password?
         </Link>
-      </motion.div>
+      </div>
 
       {/* Login Button */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-        whileHover={{ scale: isLoading ? 1 : 1.01 }}
-        whileTap={{ scale: isLoading ? 1 : 0.99 }}
-        className="mb-6"
+      <div
+        className="mb-6 animate-slide-up"
+        style={{ animationDelay: '0.3s' }}
       >
         <Button
           type="submit"
           disabled={isLoading}
           loading={isLoading}
           variant="primary"
-          className="shadow-sm"
+          className="shadow-sm hover:scale-[1.01] active:scale-[0.99] transition-transform"
         >
           {isLoading ? "Logging in..." : "Login"}
         </Button>
-      </motion.div>
+      </div>
 
       {/* Divider */}
       <FormDivider />
@@ -124,12 +91,9 @@ export const LoginForm = ({
       {/* Social Login Buttons */}
       <div className="space-y-3">
         {/* Google Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.35 }}
-          whileHover={{ scale: isLoading ? 1 : 1.01 }}
-          whileTap={{ scale: isLoading ? 1 : 0.99 }}
+        <div
+          className="animate-slide-up"
+          style={{ animationDelay: '0.35s' }}
         >
           <Button
             type="button"
@@ -137,20 +101,18 @@ export const LoginForm = ({
             disabled={isLoading}
             Icon={FcGoogle}
             variant="outline"
+            className="hover:scale-[1.01] active:scale-[0.99] transition-transform"
           >
             <span className="text-sm font-medium text-gray-700">
               Sign in with Google
             </span>
           </Button>
-        </motion.div>
+        </div>
 
         {/* GitHub Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          whileHover={{ scale: isLoading ? 1 : 1.01 }}
-          whileTap={{ scale: isLoading ? 1 : 0.99 }}
+        <div
+          className="animate-slide-up"
+          style={{ animationDelay: '0.4s' }}
         >
           <Button
             type="button"
@@ -158,20 +120,19 @@ export const LoginForm = ({
             disabled={isLoading}
             Icon={FaGithub}
             variant="outline"
+            className="hover:scale-[1.01] active:scale-[0.99] transition-transform"
           >
             <span className="text-sm font-medium text-gray-700">
               Sign in with GitHub
             </span>
           </Button>
-        </motion.div>
+        </div>
       </div>
 
       {/* Signup Link */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.45 }}
-        className="mt-6"
+      <div
+        className="mt-6 animate-slide-up"
+        style={{ animationDelay: '0.45s' }}
       >
         <p className="text-center text-sm text-gray-600">
           Don{`'`}t have an account?
@@ -182,7 +143,7 @@ export const LoginForm = ({
             Signup
           </Link>
         </p>
-      </motion.div>
+      </div>
     </form>
   );
 };

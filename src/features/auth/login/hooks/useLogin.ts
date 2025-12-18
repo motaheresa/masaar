@@ -1,3 +1,4 @@
+"use client"
 // src/features/auth/hooks/useLogin.ts
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+
 import { TagsInput, Tag } from "@/components/atoms/TagsInput/TagsInput";
 import SetupStepsFormHeader from "../molecules/SetupStepsFormHeader";
 import { OutlineTextField } from "@/components/molecules/form/Input/TextField";
@@ -25,16 +25,15 @@ const StepThreeP4StudentForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <SetupStepsFormHeader 
-        heading="Communication Preference & Interests" 
-        className="text-center sm:text-left" 
+      <SetupStepsFormHeader
+        heading="Communication Preference & Interests"
+        className="text-center sm:text-left"
       />
 
       {/* Topics tags */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.05 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.05s' }}
       >
         <Controller
           control={control}
@@ -51,13 +50,12 @@ const StepThreeP4StudentForm = () => {
             />
           )}
         />
-      </motion.div>
+      </div>
 
       {/* Languages tags */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.1s' }}
       >
         <Controller
           control={control}
@@ -74,13 +72,12 @@ const StepThreeP4StudentForm = () => {
             />
           )}
         />
-      </motion.div>
+      </div>
 
       {/* Social inputs in bordered boxes */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.15 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.15s' }}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -116,7 +113,7 @@ const StepThreeP4StudentForm = () => {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       <SetupStepsFormBtns
         disabled={!isValid}

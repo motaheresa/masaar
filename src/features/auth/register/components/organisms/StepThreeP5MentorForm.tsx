@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import { motion } from "framer-motion";
+
 import SetupStepsFormHeader from "../molecules/SetupStepsFormHeader";
 import { useStepThreeP5MentorForm } from "../../hooks/useStepThreeP5MentorForm";
 import { MdCloudUpload } from "react-icons/md";
@@ -21,7 +21,7 @@ const StepThreeP5MentorForm: React.FC = () => {
   } = useStepThreeP5MentorForm();
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const router=useRouter();
+  const router = useRouter();
   const cvFileName = watch("cvFileName");
 
   const registerToken = localStorage.getItem("accessToken");
@@ -42,14 +42,11 @@ const StepThreeP5MentorForm: React.FC = () => {
       <div className="space-y-4">
         {/* Upload State */}
         {uploadState === "idle" && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
+          <div
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onClick={() => inputRef.current?.click()}
-            className="bg-primary/20 border-2 border-dashed border-primary rounded-lg p-8 text-center cursor-pointer hover:bg-primary/30 transition-colors"
+            className="bg-primary/20 border-2 border-dashed border-primary rounded-lg p-8 text-center cursor-pointer hover:bg-primary/30 transition-colors animate-fade-in"
           >
             <MdCloudUpload className="mx-auto text-3xl text-primary mb-3" />
             <h3 className="font-semibold text-gray-900 mb-1">
@@ -73,16 +70,13 @@ const StepThreeP5MentorForm: React.FC = () => {
               className="hidden"
               aria-label="Upload CV"
             />
-          </motion.div>
+          </div>
         )}
 
         {/* Prepared State - file read and ready to upload */}
         {uploadState === "prepared" && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-            className="bg-primary/10 border border-primary rounded-lg p-6 text-center"
+          <div
+            className="bg-primary/10 border border-primary rounded-lg p-6 text-center animate-fade-in"
           >
             <h3 className="font-semibold text-gray-900 mb-1">
               File ready to upload
@@ -109,25 +103,20 @@ const StepThreeP5MentorForm: React.FC = () => {
                 Cancel
               </button>
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* Uploading State - file is being uploaded */}
         {uploadState === "uploading" && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-            className="bg-primary/10 border border-primary/30 rounded-lg p-8 text-center"
+          <div
+            className="bg-primary/10 border border-primary/30 rounded-lg p-8 text-center animate-fade-in"
           >
             <div className="mx-auto mb-3">
-              <motion.div
-                // animate={{ rotate: 360 }}
-                // transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                className="inline-block"
+              <div
+                className="inline-block animate-spin-slow"
               >
                 <MdCloudUpload className="text-4xl text-primary" />
-              </motion.div>
+              </div>
             </div>
             <h3 className="font-semibold text-primary mb-2">
               Uploading your CV...
@@ -136,22 +125,17 @@ const StepThreeP5MentorForm: React.FC = () => {
               Please wait while we process your file.
             </p>
             <div className="mt-4 w-full bg-primary/20 rounded-full h-2 overflow-hidden">
-              <motion.div
-                className="h-full bg-primary"
-                animate={{ width: ["0%", "100%"] }}
-                transition={{ duration: 2, repeat: Infinity }}
+              <div
+                className="h-full bg-primary animate-progress"
               />
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* Success State */}
         {uploadState === "success" && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-            className="bg-emerald-50 border border-emerald-300 rounded-lg p-8 text-center"
+          <div
+            className="bg-emerald-50 border border-emerald-300 rounded-lg p-8 text-center animate-scale-in"
           >
             <MdCheckCircle className="mx-auto text-5xl text-emerald-600 mb-3" />
             <h3 className="font-semibold text-emerald-900 mb-4">
@@ -160,16 +144,13 @@ const StepThreeP5MentorForm: React.FC = () => {
             <p className="text-sm text-emerald-700">
               Your CV is being analyzed and validated. Redirecting to results...
             </p>
-          </motion.div>
+          </div>
         )}
 
         {/* Error State */}
         {uploadState === "error" && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-            className="bg-rose-50 border border-rose-300 rounded-lg p-8 text-center"
+          <div
+            className="bg-rose-50 border border-rose-300 rounded-lg p-8 text-center animate-scale-in"
           >
             <div className="mx-auto text-5xl text-rose-600 mb-3">⚠️</div>
             <h3 className="font-semibold text-rose-900 mb-2">
@@ -182,7 +163,7 @@ const StepThreeP5MentorForm: React.FC = () => {
             >
               Try Again
             </button>
-          </motion.div>
+          </div>
         )}
       </div>
 

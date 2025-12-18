@@ -1,5 +1,4 @@
 import { OutlineTextField } from "@/components/molecules/form/Input/TextField";
-import { motion } from "framer-motion";
 import { OutlinePasswordField } from "@/components/molecules/form/Input/PasswordField";
 import { useStepOneForm } from "../../hooks/useStepOneForm";
 import { FormDivider } from "@/components/molecules/form/FormDivider";
@@ -11,36 +10,14 @@ const StepOneForm = () => {
   const { handleSubmit, onSubmit, register, errors, isValid, isLoading } =
     useStepOneForm();
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.04,
-        delayChildren: 0,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.18, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+        <div
           className="grid grid-cols-1"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-            <motion.div variants={itemVariants}>
+            <div className="animate-slide-up" style={{ animationDelay: '0.05s' }}>
               <OutlineTextField
                 label="First Name"
                 placeholder="e.g. Mohamed"
@@ -48,9 +25,9 @@ const StepOneForm = () => {
                 register={register}
                 error={errors.firstName?.message}
               />
-            </motion.div>
+            </div>
 
-            <motion.div variants={itemVariants}>
+            <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
               <OutlineTextField
                 label="Last Name"
                 placeholder="e.g. Taher"
@@ -58,10 +35,10 @@ const StepOneForm = () => {
                 register={register}
                 error={errors.lastName?.message}
               />
-            </motion.div>
+            </div>
           </div>
 
-          <motion.div variants={itemVariants} className="mb-6">
+          <div className="mb-6 animate-slide-up" style={{ animationDelay: '0.15s' }}>
             <OutlineTextField
               label="Email Address"
               type="email"
@@ -71,10 +48,10 @@ const StepOneForm = () => {
               register={register}
               error={errors.email?.message}
             />
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-            <motion.div variants={itemVariants} className="mb-6">
+            <div className="mb-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
               <OutlinePasswordField
                 label="Password"
                 name="password"
@@ -83,9 +60,9 @@ const StepOneForm = () => {
                 register={register}
                 error={errors.password?.message}
               />
-            </motion.div>
+            </div>
 
-            <motion.div variants={itemVariants} className="mb-8">
+            <div className="mb-8 animate-slide-up" style={{ animationDelay: '0.25s' }}>
               <OutlinePasswordField
                 label="Confirm Password"
                 name="confirmPassword"
@@ -94,26 +71,26 @@ const StepOneForm = () => {
                 register={register}
                 error={errors.confirmPassword?.message}
               />
-            </motion.div>
+            </div>
           </div>
 
-          <motion.div variants={itemVariants}>
+          <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
             <Button type="submit" disabled={isLoading}>
               Create Account
             </Button>
-          </motion.div>
+          </div>
 
           <FormDivider />
 
-          <motion.div variants={itemVariants} className="space-y-4">
+          <div className="space-y-4 animate-slide-up" style={{ animationDelay: '0.35s' }}>
             <Button Icon={FcGoogle} variant="outline">
               Sign in with google
             </Button>
             <Button Icon={FaGithub} variant="outline">
               Sign in with github
             </Button>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </form>
     </>
   );

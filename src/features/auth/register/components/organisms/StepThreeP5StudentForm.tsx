@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+
 import SetupStepsFormHeader from "../molecules/SetupStepsFormHeader";
 import SetupStepsFormBtns from "../molecules/SetupStepsFormBtns";
 import useStepThreeP5StudentForm from "../../hooks/useStepThreeP5StudentForm";
@@ -32,10 +32,9 @@ const StepThreeP5StudentForm: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 pb-10">
       <SetupStepsFormHeader heading="Personalize Experience" />
 
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.05s' }}
       >
         <label className="block text-sm font-semibold text-gray-800 mb-3">
           What Topics are you interested in ?
@@ -49,23 +48,21 @@ const StepThreeP5StudentForm: React.FC = () => {
                 key={t}
                 type="button"
                 onClick={() => toggleTopic(t)}
-                className={`px-5 py-2 rounded-full border transition-all text-sm ${
-                  selected
-                    ? "bg-primary text-white border-primary"
-                    : "bg-white text-gray-800 border-gray-300"
-                }`}
+                className={`px-5 py-2 rounded-full border transition-all text-sm ${selected
+                  ? "bg-primary text-white border-primary"
+                  : "bg-white text-gray-800 border-gray-300"
+                  }`}
               >
                 {t}
               </button>
             );
           })}
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, delay: 0.06 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.1s' }}
       >
         <label className="block text-sm font-semibold text-gray-800 mb-3">
           How do you prefer to learn ?
@@ -73,9 +70,8 @@ const StepThreeP5StudentForm: React.FC = () => {
 
         <div className="space-y-3">
           <label
-            className={`tile-radio block border rounded-md p-4 cursor-pointer transition-all ${
-              learning === "pair" ? "ring-2 ring-primary border-primary" : "border-gray-200"
-            }`}
+            className={`tile-radio block border rounded-md p-4 cursor-pointer transition-all ${learning === "pair" ? "ring-2 ring-primary border-primary" : "border-gray-200"
+              }`}
           >
             <div className="flex items-start gap-3">
               <input
@@ -94,9 +90,8 @@ const StepThreeP5StudentForm: React.FC = () => {
           </label>
 
           <label
-            className={`tile-radio block border rounded-md p-4 cursor-pointer transition-all ${
-              learning === "casual" ? "ring-2 ring-primary border-primary" : "border-gray-200"
-            }`}
+            className={`tile-radio block border rounded-md p-4 cursor-pointer transition-all ${learning === "casual" ? "ring-2 ring-primary border-primary" : "border-gray-200"
+              }`}
           >
             <div className="flex items-start gap-3">
               <input
@@ -114,7 +109,7 @@ const StepThreeP5StudentForm: React.FC = () => {
             </div>
           </label>
         </div>
-      </motion.div>
+      </div>
 
       <div>
         <SetupStepsFormBtns disabled={!isValid} loading={isLoading} backStepVal={0.1} />

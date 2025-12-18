@@ -1,5 +1,5 @@
 import { TagsInput, Tag } from "@/components/atoms/TagsInput/TagsInput";
-import { motion } from "framer-motion";
+
 import SetupStepsFormHeader from "../molecules/SetupStepsFormHeader";
 import { OutlineTextField } from "@/components/molecules/form/Input/TextField";
 import { BsLinkedin } from "react-icons/bs";
@@ -12,10 +12,10 @@ import { useSearchParams } from "next/navigation";
 
 const StepThreeP4Form = () => {
   const role = useSearchParams().get("role");
-  
+
   // Use student hook if role is student, otherwise use mentor hook
   const hookResult = role === "student" ? useStepThreeP4StudentForm() : useStepThreeP4Form();
-  
+
   const {
     register,
     control,
@@ -32,10 +32,9 @@ const StepThreeP4Form = () => {
       <SetupStepsFormHeader heading="Communication Preference" className="text-center sm:text-left" />
 
       {/* Languages tags */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.05 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.05s' }}
       >
         <Controller
           control={control}
@@ -51,13 +50,12 @@ const StepThreeP4Form = () => {
             />
           )}
         />
-      </motion.div>
+      </div>
 
       {/* Social inputs in bordered boxes */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.12 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.12s' }}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -93,7 +91,7 @@ const StepThreeP4Form = () => {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       <SetupStepsFormBtns
         disabled={!isValid}

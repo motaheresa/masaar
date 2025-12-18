@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+
 import { OutlineTextField } from "@/components/molecules/form/Input/TextField";
 import { Button } from "@/components/atoms/Button/Button";
 import { useStepTwoForm } from "../../hooks/useStepTwoForm";
@@ -14,7 +14,7 @@ import { useRegisterSteps } from "@/contexts/RegisterStepsContext";
 const genderOptions = [
   { value: "MALE", label: "Male", icon: "♂️" },
   { value: "FEMALE", label: "Female", icon: "♀️" },
-  { value: "not_preferred", label: "Not Preferred", icon: "" },
+  { value: "NOT_PREFERRED", label: "Not Preferred", icon: "" },
 ];
 const StepTwoForm = () => {
   const {
@@ -28,15 +28,14 @@ const StepTwoForm = () => {
     setValue,
   } = useStepTwoForm();
   const selectedGender = watch("gender");
-  const {prevStep} =useRegisterSteps()
+  const { prevStep } = useRegisterSteps()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* Gender Selection */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.1s' }}
       >
         <label className="block text-sm font-semibold text-gray-900 mb-3">
           Gender
@@ -50,14 +49,13 @@ const StepTwoForm = () => {
                 const input = document.querySelector(
                   `input[name="gender"][value="${option.value}"]`
                 ) as HTMLInputElement;
-                setValue("gender", option.value);
+                setValue("gender", option.value as any);
                 if (input) input.click();
               }}
-              className={`py-3 px-4 rounded-md cursor-pointer border-2 font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
-                selectedGender === option.value
-                  ? "border-teal-400 bg-primary text-gray-900"
-                  : "border-gray-200 bg-white text-gray-700 hover:bg-primary-hover/40 hover:border-gray-300"
-              }`}
+              className={`py-3 px-4 rounded-md cursor-pointer border-2 font-medium transition-all duration-200 flex items-center justify-center gap-2 ${selectedGender === option.value
+                ? "border-teal-400 bg-primary text-gray-900"
+                : "border-gray-200 bg-white text-gray-700 hover:bg-primary-hover/40 hover:border-gray-300"
+                }`}
             >
               {option.icon && <span>{option.icon}</span>}
               {option.label}
@@ -68,13 +66,12 @@ const StepTwoForm = () => {
         {errors.gender && (
           <p className="text-red-500 text-xs mt-2">{errors.gender.message}</p>
         )}
-      </motion.div>
+      </div>
 
       {/* Phone Number */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.15 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.15s' }}
       >
         <OutlineTextField
           icon={<LuPhoneCall className="text-lg text-gray-300" />}
@@ -86,13 +83,12 @@ const StepTwoForm = () => {
           register={register}
           error={errors.phoneNumber?.message}
         />
-      </motion.div>
+      </div>
 
       {/* City */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.2s' }}
       >
         <OutlineTextField
           icon={<MdLocationPin className="text-lg text-gray-300" />}
@@ -102,13 +98,12 @@ const StepTwoForm = () => {
           register={register}
           error={errors.city?.message}
         />
-      </motion.div>
+      </div>
 
       {/* Bio */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.25 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.25s' }}
       >
         <label className="block text-sm font-semibold text-gray-900 mb-2">
           Bio
@@ -120,14 +115,12 @@ const StepTwoForm = () => {
           errors={errors.bio}
           placeholder="Tell us about your coding journey and yourself"
         />
-      </motion.div>
+      </div>
 
       {/* Submit Button */}
-      <motion.div
-        initial={{ opacity: 0, y: 25 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-        className="pt-4 flex items-center justify-center gap-4"
+      <div
+        className="pt-4 flex items-center justify-center gap-4 animate-slide-up"
+        style={{ animationDelay: '0.3s' }}
       >
         <Button
           type="submit"
@@ -137,14 +130,14 @@ const StepTwoForm = () => {
           {isLoading ? "Completing Sign up..." : "Complete Sign up"}
         </Button>
         <Button
-        onClick={()=>prevStep(1)}
+          onClick={() => prevStep(1)}
           variant="outline"
           type="button"
           className="w-full flex-1"
         >
           Back
         </Button>
-      </motion.div>
+      </div>
     </form>
   );
 };

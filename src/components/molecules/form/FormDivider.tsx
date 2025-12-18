@@ -1,6 +1,5 @@
 // src/components/molecules/FormDivider.tsx
 import React from "react";
-import { motion } from "framer-motion";
 
 type FormDividerProps = {
   text?: string;
@@ -8,31 +7,26 @@ type FormDividerProps = {
 };
 
 export const FormDivider = ({ text = "or continue with", delay = 0 }: FormDividerProps) => {
+  // We'll use inline styles for dynamic delays if needed, or just simplifying
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay }}
-      className="relative my-6"
+    <div
+      className="relative my-6 animate-slide-up"
+      style={{ animationDelay: `${delay}s` }}
     >
       <div className="absolute inset-0 flex items-center">
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.6, delay: delay + 0.1 }}
-          className="w-full border-t border-gray-300 origin-left"
+        <div
+          className="w-full border-t border-gray-300 origin-left animate-scale-in"
+          style={{ animationDelay: `${delay + 0.1}s` }}
         />
       </div>
       <div className="relative flex justify-center text-sm">
-        <motion.span
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, delay: delay + 0.3 }}
-          className="px-4 bg-white text-gray-500"
+        <span
+          className="px-4 bg-white text-gray-500 animate-scale-in"
+          style={{ animationDelay: `${delay + 0.3}s` }}
         >
           {text}
-        </motion.span>
+        </span>
       </div>
-    </motion.div>
+    </div>
   );
 };

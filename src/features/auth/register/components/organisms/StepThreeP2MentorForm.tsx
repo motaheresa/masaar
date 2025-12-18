@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+
 import { Controller } from "react-hook-form";
 import { TagsInput } from "@/components/atoms/TagsInput/TagsInput";
 import { SelectBox } from "@/components/atoms/Select/SelectBox";
@@ -8,7 +8,7 @@ import SetupStepsFormHeader from "../molecules/SetupStepsFormHeader";
 import { useStepThreeP2MentorForm } from "../../hooks/useStepThreeP2MentorForm";
 
 const StepThreeP2MentorForm = () => {
-  const { handleSubmit, onSubmit, control, register, errors, isValid, isLoading,skillsOptions } =
+  const { handleSubmit, onSubmit, control, register, errors, isValid, isLoading, skillsOptions } =
     useStepThreeP2MentorForm();
 
   const yearsOptions = [
@@ -24,10 +24,9 @@ const StepThreeP2MentorForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <SetupStepsFormHeader heading="Technical Details" />
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.1s' }}
       >
         <Controller
           control={control}
@@ -42,12 +41,11 @@ const StepThreeP2MentorForm = () => {
             />
           )}
         />
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.15 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.15s' }}
       >
         <SelectBox
           label="Years of Experience"
@@ -57,12 +55,11 @@ const StepThreeP2MentorForm = () => {
           options={yearsOptions}
           error={errors?.yearsOfExperience?.message}
         />
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
+      <div
+        className="animate-slide-up"
+        style={{ animationDelay: '0.2s' }}
       >
         <Controller
           control={control}
@@ -79,7 +76,7 @@ const StepThreeP2MentorForm = () => {
             />
           )}
         />
-      </motion.div>
+      </div>
 
       <SetupStepsFormBtns disabled={!isValid} loading={isLoading} backStepVal={0.1} />
     </form>
