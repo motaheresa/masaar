@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { UseFormRegister } from "react-hook-form";
+import { ClassNameValue } from "tailwind-merge";
 
 type ITextAreaProps = {
   label?: string;
@@ -8,7 +9,7 @@ type ITextAreaProps = {
   error?: string;
   register: UseFormRegister<any>;
   name?: string;
-  className?: string;
+  className?: ClassNameValue;
   rows?: number;
   isRequired?: boolean;
 };
@@ -53,7 +54,10 @@ export const TextArea = ({
         id={id}
         rows={rows}
         {...register(name, { required: isRequired })}
-        onChange={handleChange}
+        onChange={(e)=>{
+          register(name).onChange(e)
+          handleChange()
+        }}
         placeholder={placeholder}
         className={`block w-full px-3 py-3.5 border border-gray-300 rounded-lg 
           text-gray-900 text-sm focus:ring-2 focus:ring-teal-400 focus:border-transparent 

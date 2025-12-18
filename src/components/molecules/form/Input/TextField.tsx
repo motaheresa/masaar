@@ -8,11 +8,11 @@ type IOutlineTextFieldProps = {
   type?: string;
   placeholder?: string;
   error?: string;
-  register:UseFormRegister<any>;
-  name?:string;
+  register: UseFormRegister<any>;
+  name?: string;
   className?: string;
   icon?: React.ReactElement;
-  isRequired?:boolean
+  isRequired?: boolean
 };
 
 export const OutlineTextField = ({
@@ -23,11 +23,11 @@ export const OutlineTextField = ({
   error,
   register,
   className = "",
-  name="",
+  name = "",
   icon,
-  isRequired=false
+  isRequired = false
 }: IOutlineTextFieldProps) => {
-  
+
   return (
     <div className="w-full">
       {label && (
@@ -47,11 +47,10 @@ export const OutlineTextField = ({
         <input
           id={id}
           type={type}
-          {...register(name,{required:isRequired})}
+          {...register(name, { required: isRequired })}
           placeholder={placeholder}
-          className={`block w-full ${
-            icon ? "ps-9" : "ps-3"
-          } pe-3 py-3.5 border-b-2 ${error?"border-red-500 ring-red-500 bg-red-100":"border-primary"} text-gray-900 text-sm focus:ring-2 ring-primary outline-none placeholder:text-gray-400 ${className}`}
+          className={`block w-full ${icon ? "ps-9" : "ps-3"
+            } pe-3 py-3.5 border-b-2 ${error ? "border-red-500 ring-red-500 bg-red-100" : "border-primary"} text-gray-900 text-sm focus:ring-2 ring-primary outline-none placeholder:text-gray-400 ${className}`}
         />
       </div>
       {error && <span className="text-sm text-red-500">{error}</span>}

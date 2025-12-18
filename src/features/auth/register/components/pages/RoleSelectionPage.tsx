@@ -6,7 +6,7 @@ import MentorImg from "@/assets/images/mentor_role_Selection.png";
 import StudentImg from "@/assets/images/student_role_selection.png";
 import RoleSelectionCard from "../molecules/RoleSelectionCard";
 import Link from "next/link";
-import Navbar from "@/components/organisms/Navbar";
+import Navbar from "@/components/organisms/navbar/NavbarLayout";
 import CopyRights from "@/components/organisms/CopyRights";
 
 const RoleSelectionPage = () => {

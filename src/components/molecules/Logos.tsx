@@ -6,7 +6,7 @@ import Logo from "@/assets/images/logo.png"
 
 type BrandLogoProps = {
   className?: string;
-  size?: "sm" | "md" | "lg";
+  size?: "sm"  | "lg";
   variant?: "primary" | "colored";
 };
 
@@ -20,18 +20,16 @@ export const LoginLogo = ({
     colored: Logo,
   };
   const sizes = {
-    "sm": "md:w-44 md:h-14 w-36 h-12",
-    "md": "",
+    "sm": "md:w-44 md:h-14 w-24 h-8",
     "lg": "md:w-80 md:h-24 w-36 h-12"
   }
 
   return (
     <div
-      className={`${sizes[size]} inline-flex relative items-center gap-2 text-primary animate-fade-in ${className}`}
+      className={`${sizes[size]||""} inline-flex relative items-center gap-2 text-primary animate-fade-in ${className}`}
     >
       <div
         className="relative w-full h-full animate-scale-in"
-        style={{ animationDelay: '0.1s' }}
       >
         <Image
           src={variants[variant]}

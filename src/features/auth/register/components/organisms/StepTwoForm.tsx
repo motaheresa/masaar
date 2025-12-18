@@ -7,14 +7,15 @@ import { LuPhoneCall } from "react-icons/lu";
 import { MdLocationPin } from "react-icons/md";
 import Textarea from "@/components/molecules/form/Input/Textarea";
 import { useRegisterSteps } from "@/contexts/RegisterStepsContext";
+import { OptionButtonGroup, OptionItem } from "@/components/molecules/form/OptionButtonGroup";
 
 // Review on code in this component
 // make schema
 
-const genderOptions = [
-  { value: "MALE", label: "Male", icon: "♂️" },
-  { value: "FEMALE", label: "Female", icon: "♀️" },
-  { value: "NOT_PREFERRED", label: "Not Preferred", icon: "" },
+const genderOptions: OptionItem[] = [
+  { value: "MALE", label: "Male" },
+  { value: "FEMALE", label: "Female" },
+  { value: "NOT_PREFERRED", label: "Not Preferred" },
 ];
 const StepTwoForm = () => {
   const {
@@ -37,31 +38,13 @@ const StepTwoForm = () => {
         className="animate-slide-up"
         style={{ animationDelay: '0.1s' }}
       >
-        <label className="block text-sm font-semibold text-gray-900 mb-3">
-          Gender
-        </label>
-        <div className="grid grid-cols-3 gap-4">
-          {genderOptions.map((option) => (
-            <button
-              key={option.value}
-              type="button"
-              onClick={() => {
-                const input = document.querySelector(
-                  `input[name="gender"][value="${option.value}"]`
-                ) as HTMLInputElement;
-                setValue("gender", option.value as any);
-                if (input) input.click();
-              }}
-              className={`py-3 px-4 rounded-md cursor-pointer border-2 font-medium transition-all duration-200 flex items-center justify-center gap-2 ${selectedGender === option.value
-                ? "border-teal-400 bg-primary text-gray-900"
-                : "border-gray-200 bg-white text-gray-700 hover:bg-primary-hover/40 hover:border-gray-300"
-                }`}
-            >
-              {option.icon && <span>{option.icon}</span>}
-              {option.label}
-            </button>
-          ))}
-        </div>
+        <OptionButtonGroup
+          label="Gender"
+          options={genderOptions}
+          selectedValue={selectedGender || ""}
+          onChange={(value) => setValue("gender", value as any)}
+          showIcons={false}
+        />
         <input type="hidden" {...register("gender")} />
         {errors.gender && (
           <p className="text-red-500 text-xs mt-2">{errors.gender.message}</p>

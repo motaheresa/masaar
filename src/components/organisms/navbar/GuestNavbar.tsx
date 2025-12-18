@@ -1,19 +1,8 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
-import Navbar from "@/components/organisms/Navbar";
-import { FiMenu, FiX } from "react-icons/fi";
-import { GuestHeaderDropdown } from "./GuestHeaderDropdown";
+import Navbar from "@/components/organisms/navbar/NavbarLayout";
+import { GuestHeaderDropdown } from "../../../features/guest/components/organisms/GuestHeaderDropdown";
 
 export const GuestHeader = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const menuAriaExpanded = isMenuOpen ? "true" : "false";
 
   return (
     <div className="absolute top-0 z-10 w-full animate-fade-in">
@@ -60,17 +49,13 @@ export const GuestHeader = () => {
         </div>
 
         {/* Mobile Menu Button - Visible only on mobile */}
-        
+
 
         {/* Mobile Menu Dropdown - Slides down when open */}
         <div
-          className={`md:hidden absolute top-full left-0 right-0 bg-light-gray border-t border-gray-200 shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${
-            isMenuOpen
-              ? "opacity-100 visible translate-y-0 max-h-[500px]"
-              : "opacity-0 invisible -translate-y-4 max-h-0"
-          }`}
+          className={`md:hidden absolute top-full left-0 right-0 bg-light-gray border-t border-gray-200 shadow-lg overflow-hidden transition-all duration-300 ease-in-out `}
         >
-          
+
         </div>
         <GuestHeaderDropdown />
       </Navbar>

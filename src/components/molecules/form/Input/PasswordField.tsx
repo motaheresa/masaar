@@ -43,6 +43,7 @@ export const OutlinePasswordField = ({
   };
 
   const displayError = apiErr || error;
+  const registerProps = register(name, { required: isRequired });
 
   return (
     <div>
@@ -66,13 +67,14 @@ export const OutlinePasswordField = ({
           id={id}
           type={isPassShown ? "text" : "password"}
           placeholder={placeholder}
-          {...register(name, { required: isRequired })}
-          onChange={handleChange}
-          className={`block w-full ${
-            icon ? "ps-9" : "ps-3"
-          } pe-10 py-3.5 border-b-2 ${
-            displayError ? "border-red-500 ring-red-500 bg-red-100" : "border-primary"
-          } text-gray-900 text-sm focus:ring-2 ring-primary outline-none placeholder:text-gray-400 ${className}`}
+          {...registerProps}
+          onChange={(e) => {
+            registerProps.onChange(e);
+            handleChange();
+          }}
+          className={`block w-full ${icon ? "ps-9" : "ps-3"
+            } pe-10 py-3.5 border-b-2 ${displayError ? "border-red-500 ring-red-500 bg-red-100" : "border-primary"
+            } text-gray-900 text-sm focus:ring-2 ring-primary outline-none placeholder:text-gray-400 ${className}`}
         />
 
         {/* Eye toggle button */}

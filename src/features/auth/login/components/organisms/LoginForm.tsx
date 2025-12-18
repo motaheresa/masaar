@@ -37,6 +37,7 @@ export const LoginForm = () => {
           type="email"
           placeholder="your@example.com"
           name="email"
+          isRequired={true}
           register={register}
           error={errors.email?.message}
         />
@@ -50,6 +51,7 @@ export const LoginForm = () => {
         <OutlinePasswordField
           label="Password"
           name="password"
+          isRequired={true}
           placeholder="••••••••••"
           register={register}
           error={errors.password?.message}

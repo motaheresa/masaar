@@ -15,12 +15,12 @@ export const auth = (req: NextRequest) => {
     }
 
 
-    if (!token) {
-        console.log("[Auth]: No token found. Redirecting to login.");
-        // This is a terminating response. It will stop the middleware chain.
-        const loginUrl = new URL('/login', req.url);
-        return NextResponse.redirect(loginUrl);
-    }
+    // if (!token) {
+    //     console.log("[Auth]: No token found. Redirecting to login.");
+    //     // This is a terminating response. It will stop the middleware chain.
+    //     const loginUrl = new URL('/login', req.url);
+    //     return NextResponse.redirect(loginUrl);
+    // }
 
     console.log("[Auth]: Token found. Proceeding.");
     // To continue, we return NextResponse.next()

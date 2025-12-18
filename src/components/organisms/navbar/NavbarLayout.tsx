@@ -2,7 +2,7 @@
 import React from "react";
 import { LoginLogo } from "@/components/molecules/Logos";
 
-const Navbar = ({
+const NavbarLayout = ({
   children,
   className = "",
 }: {
@@ -19,4 +19,4 @@ const Navbar = ({
   );
 };
 
-export default Navbar;
+export default NavbarLayout;
